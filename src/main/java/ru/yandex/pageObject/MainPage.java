@@ -11,31 +11,34 @@ public class MainPage extends BasePage {
     public static final String URL = "https://qa-scooter.praktikum-services.ru/";
 
     // кнопка "Заказать" вверху странички
-    private final By buttonNext = By.xpath(".//button[@class='Button_Button__ra12g']");
+    private final By makeOrderButtonAbove = By.cssSelector(".Button_Button__ra12g");
+
+    // кнопка "Заказать" внизу странички
+    private final By makeOrderButtonBelow = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
 
     // первый вопрос "Сколько стоит? М как оплатить?"
-    private final By firstQuestion = By.id("accordion__heading-0");
+    private final By questionAboutCost = By.id("accordion__heading-0");
 
     // второй вопрос "Хочу сразу несколько самокатов! Так можно?"
-    private final By secondQuestion = By.id("accordion__heading-1");
+    private final By questionAboutMassRental = By.id("accordion__heading-1");
 
     // третий вопрос "Как рассчитывается время аренды?"
-    private final By thirdQuestion = By.id("accordion__heading-2");
+    private final By questionAboutRentalTime = By.id("accordion__heading-2");
 
     // четвертый вопрос "Можно ли заказать самокат прямо на сегодня?"
-    private final By fourthQuestion = By.id("accordion__heading-3");
+    private final By questionAboutOrderForToday = By.id("accordion__heading-3");
 
     // пятый вопрос "Можно ли продлить заказ или вернуть самокат раньше?"
-    private final By fifthQuestion = By.id("accordion__heading-4");
+    private final By questionAboutRenewalAndRefund = By.id("accordion__heading-4");
 
     // шестой вопрос "Вы привозите зарядку вместе с самокатом?"
-    private final By sixthQuestion = By.id("accordion__heading-5");
+    private final By questionAboutCharger = By.id("accordion__heading-5");
 
     // седьмой вопрос "Можно ли отменить заказ?"
-    private final By seventhQuestion = By.id("accordion__heading-6");
+    private final By questionAboutOrderCancellation = By.id("accordion__heading-6");
 
     // восьмой вопрос "Я жизу за МКАДом, привезёте?"
-    private final By eighthQuestion = By.id("accordion__heading-7");
+    private final By questionAboutDelivery = By.id("accordion__heading-7");
 
 
     // конструктор
@@ -44,8 +47,15 @@ public class MainPage extends BasePage {
     }
 
     //клик по верхней кнопке
-    public OrderPage clickButtonOrder() {
-        driver.findElement(buttonNext).click();
+    public OrderPage clickButtonOrderAbove() {
+        driver.findElement(makeOrderButtonAbove).click();
+        return new OrderPage(driver);
+    }
+
+    public OrderPage clickButtonOrderBelow() {
+        WebElement element = driver.findElement(makeOrderButtonBelow);
+        scrollTo(element);
+        element.click();
         return new OrderPage(driver);
     }
 
@@ -55,57 +65,57 @@ public class MainPage extends BasePage {
     }
 
     // достаем текст первого элемента
-    public WebElement getFirstQuestion() {
-        WebElement element = driver.findElement(firstQuestion);
+    public WebElement getQuestionAboutCost() {
+        WebElement element = driver.findElement(questionAboutCost);
         scrollTo(element);
         return element;
     }
 
     // достаем текст второго элемента
-    public WebElement getSecondQuestion() {
-        WebElement element = driver.findElement(secondQuestion);
+    public WebElement getQuestionAboutMassRental() {
+        WebElement element = driver.findElement(questionAboutMassRental);
         scrollTo(element);
         return element;
     }
 
     // достаем текст третьего элемента
-    public WebElement getThirdQuestion() {
-        WebElement element = driver.findElement(thirdQuestion);
+    public WebElement getQuestionAboutRentalTime() {
+        WebElement element = driver.findElement(questionAboutRentalTime);
         scrollTo(element);
         return element;
     }
 
     // достаем текст четвертого элемента
-    public WebElement getFourthQuestion() {
-        WebElement element = driver.findElement(fourthQuestion);
+    public WebElement getQuestionAboutOrderForToday() {
+        WebElement element = driver.findElement(questionAboutOrderForToday);
         scrollTo(element);
         return element;
     }
 
     // достаем текст пятого элемента
-    public WebElement getFifthQuestion() {
-        WebElement element = driver.findElement(fifthQuestion);
+    public WebElement getQuestionAboutRenewalAndRefund() {
+        WebElement element = driver.findElement(questionAboutRenewalAndRefund);
         scrollTo(element);
         return element;
     }
 
     // достаем текст шестого элемента
-    public WebElement getSixthQuestion() {
-        WebElement element = driver.findElement(sixthQuestion);
+    public WebElement getQuestionAboutCharger() {
+        WebElement element = driver.findElement(questionAboutCharger);
         scrollTo(element);
         return element;
     }
 
     // достаем текст седьмого элемента
-    public WebElement getSeventhQuestion() {
-        WebElement element = driver.findElement(seventhQuestion);
+    public WebElement getQuestionAboutOrderCancellation() {
+        WebElement element = driver.findElement(questionAboutOrderCancellation);
         scrollTo(element);
         return element;
     }
 
     // достаем текст восьмого элемента
-    public WebElement getEighthQuestion() {
-        WebElement element = driver.findElement(eighthQuestion);
+    public WebElement getQuestionAboutDelivery() {
+        WebElement element = driver.findElement(questionAboutDelivery);
         scrollTo(element);
         return element;
     }

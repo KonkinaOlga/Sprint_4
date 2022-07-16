@@ -10,8 +10,9 @@ public class OrderForm {
     private  String rentalPeriod;
     private  String scooterColour;
     private  String orderComment;
+    private boolean isTopButton;
 
-    public OrderForm (String name, String surname, String address, String metroStation, String phoneNumber, String orderDate, String rentalPeriod, String scooterColour, String orderComment) {
+    public OrderForm (String name, String surname, String address, String metroStation, String phoneNumber, String orderDate, String rentalPeriod, String scooterColour, String orderComment, boolean isTopButton) {
         this.setName(name);
         this.setSurname(surname);
         this.setAddress(address);
@@ -21,6 +22,7 @@ public class OrderForm {
         this.setRentalPeriod(rentalPeriod);
         this.setScooterColour(scooterColour);
         this.setOrderComment(orderComment);
+        this.setIsTopButton(isTopButton);
     }
 
     public String getName() {
@@ -93,5 +95,12 @@ public class OrderForm {
 
     public void setOrderComment(String orderComment) {
         this.orderComment = orderComment;
+    }
+
+    public void setIsTopButton(boolean isTopButton) {
+        this.isTopButton = isTopButton;
+    }
+    public boolean getIsTopButton() {
+        return this.isTopButton;
     }
 }

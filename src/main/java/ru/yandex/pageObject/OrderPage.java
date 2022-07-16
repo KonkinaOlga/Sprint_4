@@ -1,9 +1,7 @@
 package ru.yandex.pageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class OrderPage extends BasePage {
 
@@ -74,7 +72,7 @@ public class OrderPage extends BasePage {
     }
 
     // заполнить Адрес
-    public OrderPage setАddress(String address){
+    public OrderPage setAddress(String address){
         driver.findElement(inputAddress).sendKeys(address);
         return this;
     }

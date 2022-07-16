@@ -1,12 +1,10 @@
 package ru.yandex.Tests;
 
 
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.data.OrderForm;
 import ru.yandex.pageObject.MainPage;
 import ru.yandex.pageObject.OrderPage;
@@ -24,20 +22,25 @@ public class OrderTest extends BaseUiTest {
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][] {
-                {new OrderForm("Оля","Конкина", "Питер дом1", "Сокольники", "+79277765376","13.07.2022","сутки", "Серый","Коммент")},
-                {new OrderForm("Толя","Иванова", "Москва дом2", "Сокольники", "+79277760000","15.07.2022","сутки", "Черный","Коммент")},
+                {new OrderForm("Оля","Конкина", "Питер дом1", "Сокольники", "+79277765376","13.07.2022","сутки", "Серый","Коммент", true)},
+                {new OrderForm("Толя","Иванова", "Москва дом2", "Сокольники", "+79277760000","15.07.2022","сутки", "Черный","Коммент", false)},
         };
     }
 
     @Test
-    public void checkOrderFlow() throws InterruptedException {
+    public void checkOrderFlow() {
         driver.get(MainPage.URL);
         MainPage page = new MainPage(driver);
-        String result = page
-                .clickButtonOrder()
+        OrderPage orderPage;
+        if (form.getIsTopButton())
+            orderPage = page.clickButtonOrderAbove();
+        else
+            orderPage = page.clickButtonOrderBelow();
+
+        String result = orderPage
                 .setName(form.getName())
                 .setSurname(form.getSurname())
-                .setАddress(form.getAddress())
+                .setAddress(form.getAddress())
                 .setMetroStation(form.getMetroStation())
                 .setPhoneNumber(form.getPhoneNumber())
                 .clickButtonNext()
@@ -48,7 +51,11 @@ public class OrderTest extends BaseUiTest {
                 .clickButtonBy()
                 .clickButtonOrderYes()
                 .getTextInOrderModalHeader();
-        assertEquals ("Заказ не оформлен","Заказ оформлен",result);
+
+        // т.к. assertThat, который используется в курсе, deprecated
+        // Assert.assertThat(result, containsString("Заказ оформлен"));
+        // делаю через assertTrue
+        Assert.assertTrue("Заказ не оформлен",result.contains("Заказ оформлен"));
     }
 
 }
